@@ -80,6 +80,7 @@ class pecuniaLoanTest {
 	void testValidateRateOfInterest2() {
 		boolean status2 = serviceDao.validateAmount(5.5);
 		assertEquals(false, status2);
+		
 	}
 	
 	@Test
