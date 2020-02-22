@@ -39,18 +39,20 @@ public class LoanDaoImpl implements LoanDao{
 
 	@Override
 	public String loanApprovalStatus(Loan loan,String accountId) throws LoanException {
+		String approved = "approved";
+		String rejected = "rejected";
 	
 		if((loan.getCreditScore()>=670 && loan.getCreditScore()<=999) && loan.getAccountId().equals(accountId) ) {
-			loan.setLoanStatus("approved");
+			loan.setLoanStatus(approved);
 			double balance = loan.getAccountBalance()+loan.getAmount();
 			loan.setAccountBalance(balance);
 		}
 		else
-			loan.setLoanStatus("rejected");
+			loan.setLoanStatus(rejected);
 		
 		double amount = loan.getAmount() + (loan.getAmount()*loan.getRateOfInterest()/100);
 		double emi = amount/(loan.getTenure());
-		if(loan.getLoanStatus().equals("approved"))
+		if(loan.getLoanStatus().equals(approved))
 			loan.setEmi(emi);
 		
 		return loan.getLoanStatus();
