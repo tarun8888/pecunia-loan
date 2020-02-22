@@ -77,9 +77,9 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public String loanApprovalStatus(Loan loan) throws LoanException {
+	public String loanApprovalStatus(Loan loan, String accountId) throws LoanException {
 	
-		return loanDao.loanApprovalStatus(loan);
+		return loanDao.loanApprovalStatus(loan,accountId);
 	}
 
 	@Override

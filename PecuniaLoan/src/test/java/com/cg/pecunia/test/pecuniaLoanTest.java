@@ -25,12 +25,10 @@ class pecuniaLoanTest {
 	
 	@Test
 	void testLoanApprovalStatus() throws LoanException{
-		String status1 = loanDao.loanApprovalStatus(loan1);
-		String status2 = loanDao.loanApprovalStatus(loan2);
+		String status1 = loanDao.loanApprovalStatus(loan1,"123456789012");
+		String status2 = loanDao.loanApprovalStatus(loan2,"123456789021");
 		assertEquals("approved", status1);
 		assertEquals("rejected", status2);
 	}
-	
-	
 
 }

@@ -11,6 +11,6 @@ public interface LoanDao {
 	public String createLoanRequest(Loan loan) throws LoanException;
 	public List<Loan> loanRequestList() throws LoanException;
 	public List<Loan> loanApprovalList(Loan loan) throws LoanException;
-	public String loanApprovalStatus(Loan loan) throws LoanException;
+	public String loanApprovalStatus(Loan loan , String accountId) throws LoanException;
 	public double calculateEmiForLoan(Loan loan) throws LoanException;
 }

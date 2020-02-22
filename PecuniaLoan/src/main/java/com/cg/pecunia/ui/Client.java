@@ -20,13 +20,12 @@ public class Client {
 		List<Loan> list= null;
 		while(true) {
 			
-			System.out.println("\n1. Add Details");
-			System.out.println("2. Create Request");
-			System.out.println("3. Loan Approval Status");
-			System.out.println("4. Calculate Loan EMI");
+			System.out.println("\n1. Add Details for Loan");
+			System.out.println("2. Loan Approval Status");
+			System.out.println("3. Calculate Loan EMI");
+			System.out.println("4. Loan approval list");
 			System.out.println("5. List Loan Requests");
-			System.out.println("6. Loan approval list");
-			System.out.println("7. Exit");
+			System.out.println("6. Exit");
 			
 			
 			int choice = scanner.nextInt();
@@ -34,6 +33,7 @@ public class Client {
 			switch (choice) {
 			case 1:
 				try {
+					
 					System.out.println("Enter Exsisting Account Number");
 					String id = scanner.next();
 					System.out.println("Enter Loan amount");
@@ -47,26 +47,18 @@ public class Client {
 					loan = loanService.addLoanDetails(id, amount, tenure, roi, score);
 					loan.setAccountBalance(10000);
 					System.out.println("(Account Number:"+loan.getAccountId()+") Details added sucessfully for loan");
-					
-				}
-				catch (LoanException le) {
-					System.err.println(le.getMessage());
-				}
-				break;
-			case 2:
-				try {
-					String id = loanService.createLoanRequest(loan);
-					System.out.println("(Account Number:"+id+") requested for loan of "+ loan.getAmount()+" for "+loan.getTenure()+" months");
-					
+					String sid = loanService.createLoanRequest(loan);
+					System.out.println("(Account Number:"+sid+") requested for loan of "+ loan.getAmount()+" for "+loan.getTenure()+" months");
+	
 				}
 				catch (LoanException le) {
 					System.err.println(le.getMessage());
 				}
 				break;
 				
-			case 3:
+			case 2:
 				try {
-					System.out.println("(Account Number:"+loan.getAccountId()+") Loan Status = "+loanService.loanApprovalStatus(loan));
+					System.out.println("(Account Number:"+loan.getAccountId()+") Loan Status = "+loanService.loanApprovalStatus(loan,loan.getAccountId()));
 					
 				}
 				catch(LoanException le) {
@@ -74,7 +66,7 @@ public class Client {
 				}
 				break;
 			
-			case 4:
+			case 3:
 				try {
 					System.out.println("(Account Number:"+loan.getAccountId()+") emi = "+loanService.calculateEmiForLoan(loan));
 					
@@ -84,7 +76,7 @@ public class Client {
 				}
 				break;
 				
-			case 5:
+			case 4:
 				try {
 					list = new ArrayList<>();
 					list = loanService.loanRequestList();
@@ -100,7 +92,7 @@ public class Client {
 				break;
 				
 			
-			case 6:
+			case 5:
 				try {
 					list = new ArrayList<Loan>();
 					list = loanService.loanApprovalList(loan);
@@ -114,7 +106,7 @@ public class Client {
 				}
 				break;
 			
-			case 7:
+			case 6:
 				System.out.println("Thank You! :) ");
 				return;
 

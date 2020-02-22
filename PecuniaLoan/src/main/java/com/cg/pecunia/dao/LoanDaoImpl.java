@@ -10,11 +10,10 @@ import com.cg.pecunia.exception.LoanException;
 
 public class LoanDaoImpl implements LoanDao{
 	private LinkedHashMap<String, Loan> loanMap;
+	Loan loan = null;
 	public LoanDaoImpl() {
 		loanMap = new LinkedHashMap<>();
 	}
-	
-	
 	
 	public String createLoanRequest(Loan loan) throws LoanException {
 		
@@ -28,7 +27,7 @@ public class LoanDaoImpl implements LoanDao{
 
 
 	public Loan addLoanDetails(String accountId, double amount, int tenure, double rateOfInterest, int creditScore) throws LoanException {
-		Loan loan = new Loan();
+		loan = new Loan();
 		loan.setAccountId(accountId);
 		loan.setAmount(amount);
 		loan.setRateOfInterest(rateOfInterest);
@@ -39,9 +38,9 @@ public class LoanDaoImpl implements LoanDao{
 	}
 
 	@Override
-	public String loanApprovalStatus(Loan loan) throws LoanException {
+	public String loanApprovalStatus(Loan loan,String accountId) throws LoanException {
 	
-		if(loan.getCreditScore()>=670 && loan.getCreditScore()<=999) {
+		if((loan.getCreditScore()>=670 && loan.getCreditScore()<=999) && loan.getAccountId().equals(accountId) ) {
 			loan.setLoanStatus("approved");
 			double balance = loan.getAccountBalance()+loan.getAmount();
 			loan.setAccountBalance(balance);
