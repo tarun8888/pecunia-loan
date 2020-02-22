@@ -86,7 +86,7 @@ public class Client {
 				
 			case 5:
 				try {
-					list = new ArrayList<Loan>();
+					list = new ArrayList<>();
 					list = loanService.loanRequestList();
 					System.out.println("Account ID\t\tTenure\t\tLoan Amount\t\tRate Of Interest\t\tCredit Score\t\tLoan Status\t\tAccount Balance\t\tEMI\n");
 					list.stream().forEach(p -> System.out.println(p));

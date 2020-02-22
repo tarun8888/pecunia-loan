@@ -1,18 +1,17 @@
 package com.cg.pecunia.dao;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.cg.pecunia.bean.Loan;
 import com.cg.pecunia.exception.LoanException;
 
 public class LoanDaoImpl implements LoanDao{
-	private HashMap<String, Loan> loanMap;
+	private LinkedHashMap<String, Loan> loanMap;
 	public LoanDaoImpl() {
-		loanMap = new HashMap<String, Loan>();
+		loanMap = new LinkedHashMap<>();
 	}
 	
 	
@@ -41,7 +40,7 @@ public class LoanDaoImpl implements LoanDao{
 
 	@Override
 	public String loanApprovalStatus(Loan loan) throws LoanException {
-		// TODO Auto-generated method stub
+	
 		if(loan.getCreditScore()>=670 && loan.getCreditScore()<=999) {
 			loan.setLoanStatus("approved");
 			double balance = loan.getAccountBalance()+loan.getAmount();
@@ -59,9 +58,9 @@ public class LoanDaoImpl implements LoanDao{
 	}
 
 	public List<Loan> loanRequestList() throws LoanException {
-		// TODO Auto-generated method stub
+		
 		Collection<Loan> collection = loanMap.values();
-		List<Loan> list = new ArrayList<Loan>();
+		List<Loan> list = new ArrayList<>();
 		for(Loan loan : collection) {
 			list.add(loan);
 		}
@@ -73,7 +72,7 @@ public class LoanDaoImpl implements LoanDao{
 	@Override
 	public List<Loan> loanApprovalList(Loan loan) throws LoanException {
 		Collection<Loan> collection = loanMap.values();
-		List<Loan> list = new ArrayList<Loan>();
+		List<Loan> list = new ArrayList<>();
 		for(Loan approvedLoan : collection) {
 			if(approvedLoan.getCreditScore()>=700 && approvedLoan.getCreditScore()<=999)
 				list.add(approvedLoan);
@@ -85,8 +84,6 @@ public class LoanDaoImpl implements LoanDao{
 
 	@Override
 	public double calculateEmiForLoan(Loan loan) throws LoanException {
-		// TODO Auto-generated method stub
-		
 		if(loan.getLoanStatus().equals("approved"))
 			return loan.getEmi();
 		else 

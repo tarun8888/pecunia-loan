@@ -10,6 +10,16 @@ public class Loan {
 	private int creditScore;
 	private double accountBalance;
 	private double emi;
+	
+	
+	public Loan(String accountId, int tenure, double amount, double rateOfInterest, int creditScore) {
+		super();
+		this.accountId = accountId;
+		this.tenure = tenure;
+		this.amount = amount;
+		this.rateOfInterest = rateOfInterest;
+		this.creditScore = creditScore;
+	}
 	public double getEmi() {
 		return emi;
 	}
