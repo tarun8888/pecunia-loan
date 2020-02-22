@@ -73,7 +73,7 @@ public class LoanDaoImpl implements LoanDao{
 		Collection<Loan> collection = loanMap.values();
 		List<Loan> list = new ArrayList<>();
 		for(Loan approvedLoan : collection) {
-			if(approvedLoan.getCreditScore()>=700 && approvedLoan.getCreditScore()<=999)
+			if(approvedLoan.getCreditScore()>=670 && approvedLoan.getCreditScore()<=999)
 				list.add(approvedLoan);
 		}
 		return list;

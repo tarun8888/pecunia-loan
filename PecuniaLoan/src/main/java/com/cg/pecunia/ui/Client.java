@@ -38,17 +38,23 @@ public class Client {
 					String id = scanner.next();
 					System.out.println("Enter Loan amount");
 					double amount = scanner.nextDouble();
-					System.out.println("Enter tenure in months");
+					System.out.println("Enter tenure in months (above 12 months)");
 					int tenure = scanner.nextInt();
-					System.out.println("Enter rate of interest");
+					System.out.println("Enter rate of interest (above 7%)");
 					double roi = scanner.nextDouble();
-					System.out.println("Enter credit score");
+					System.out.println("Enter credit score (above 100)");
 					int score = scanner.nextInt();
+					System.out.println("proceed (Y/N)?");
+					char proceed = scanner.next().charAt(0);
+					if(proceed == 'Y' || proceed=='y') {
 					loan = loanService.addLoanDetails(id, amount, tenure, roi, score);
 					loan.setAccountBalance(10000);
-					System.out.println("(Account Number:"+loan.getAccountId()+") Details added sucessfully for loan");
 					String sid = loanService.createLoanRequest(loan);
-					System.out.println("(Account Number:"+sid+") requested for loan of "+ loan.getAmount()+" for "+loan.getTenure()+" months");
+					System.out.println("(Account Number:"+sid+") Details added sucessfully for loan");	
+					System.out.println("Requested for loan of "+ loan.getAmount()+" for "+loan.getTenure()+" months");
+					}
+					else
+						break;
 	
 				}
 				catch (LoanException le) {
