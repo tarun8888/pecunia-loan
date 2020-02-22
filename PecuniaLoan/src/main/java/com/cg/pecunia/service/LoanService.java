@@ -16,5 +16,6 @@ public interface LoanService {
 	public boolean validateCreditScore(int creditScore);
 	public String loanApprovalStatus(Loan loan, String accountNumber) throws LoanException;
 	public double calculateEmiForLoan(Loan loan) throws LoanException;
+	public boolean validateNumber(String number) throws LoanException;
 
 }

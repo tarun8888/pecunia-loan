@@ -34,17 +34,56 @@ public class Client {
 			switch (choice) {
 			case 1:
 				try {
-					
+					String id = null;
+					double amount = 0,roi=0;
+					int tenure=0,score=0;
+					try {
 					System.out.println("Enter Exsisting Account Number");
-					String id = scanner.next();
+					 id = scanner.next();
+					 if(!loanService.validateNumber(id))
+							 throw new LoanException("Invalid account Id : Id should be 12 digit");
+
+					}
+					catch(LoanException e) {
+						System.err.println("\n"+e.getMessage()+"\n");
+					}
+					try {
 					System.out.println("Enter Loan amount");
-					double amount = scanner.nextDouble();
+					amount = scanner.nextDouble();
+					if(!loanService.validateAmount(amount))
+						throw new LoanException("Invalid Loan amount : Amount should be greater than 1000");
+					}
+					catch(LoanException e) {
+						System.err.println("\n"+e.getMessage()+"\n");
+					}
+					try {
 					System.out.println("Enter tenure in months (above 12 months)");
-					int tenure = scanner.nextInt();
-					System.out.println("Enter rate of interest (above 7%)");
-					double roi = scanner.nextDouble();
+					tenure = scanner.nextInt();
+					if(!loanService.validateTenure(tenure))
+						 throw new LoanException("Invalid tenure: entered value is not valid");
+					}
+					catch(LoanException e) {
+						System.err.println("\n"+e.getMessage()+"\n");
+					}
+					try {
+					System.out.println("Enter rate of interest (above 7.0%)");
+					roi = scanner.nextDouble();
+					if(!loanService.validateRateOfInterest(roi))
+						throw new LoanException("Invalid Interest rate : Rate of interest should be  in range of 4% to 15%");
+					}
+					catch(LoanException e) {
+						System.err.println("\n"+e.getMessage()+"\n");
+					}
+					try {
 					System.out.println("Enter credit score (above 100)");
-					int score = scanner.nextInt();
+					score = scanner.nextInt();
+					if(!loanService.validateCreditScore(score))
+						throw new LoanException("Invalid credit score : credit score should be in range of 100 to 999");
+					}
+					catch(LoanException e) {
+						System.err.println("\n"+e.getMessage()+"\n");
+					}
+					
 					System.out.println("proceed (Y/N)?");
 					char proceed = scanner.next().charAt(0);
 					if(proceed == 'Y' || proceed=='y') {
@@ -54,12 +93,17 @@ public class Client {
 					System.out.println("(Account Number:"+sid+") Details added sucessfully for loan");	
 					System.out.println("Requested for loan of "+ loan.getAmount()+" for "+loan.getTenure()+" months");
 					}
-					else
-						break;
+					
+					else {
+						if(proceed == 'N' || proceed =='n')
+							break;
+						System.err.println("enter valid option");
+					}
+							
 	
 				}
 				catch (LoanException le) {
-					System.err.println(le.getMessage());
+					System.err.println("\n"+le.getMessage()+"\n");
 				}
 				break;
 				
@@ -69,7 +113,7 @@ public class Client {
 					
 				}
 				catch(LoanException le) {
-					System.err.println(le.getMessage());
+					System.err.println("\n"+le.getMessage()+"\n");
 				}
 				break;
 			
@@ -79,7 +123,7 @@ public class Client {
 					
 				}
 				catch(LoanException le) {
-					System.err.println(le.getMessage());
+					System.err.println("\n"+le.getMessage()+"\n");
 				}
 				break;
 				
@@ -94,7 +138,7 @@ public class Client {
 					
 				}
 				catch(LoanException le) {
-					System.err.println(le.getMessage());
+					System.err.println("\n"+le.getMessage()+"\n");
 				}
 				break;
 				
@@ -109,7 +153,7 @@ public class Client {
 					
 				}
 				catch(LoanException le) {
-					System.err.println(le.getMessage());
+					System.err.println("\n"+le.getMessage()+"\n");
 				}
 				break;
 			
@@ -124,7 +168,7 @@ public class Client {
 		}
 		}
 		catch(InputMismatchException e) {
-			System.err.println("enter valid number (1-6)");
+			System.err.println("\nenter valid number (1-6)\n");
 		}
 
 	}

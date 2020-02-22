@@ -88,4 +88,10 @@ public class LoanServiceImpl implements LoanService {
 		return loanDao.calculateEmiForLoan(loan);
 	}
 
+	@Override
+	public boolean validateNumber(String number) throws LoanException {
+		// TODO Auto-generated method stub
+		return number.matches("[0-9]{12}");
+	}
+
 }
