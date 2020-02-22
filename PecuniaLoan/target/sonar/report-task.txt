@@ -2,5 +2,5 @@ projectKey=pecunia:loan
 serverUrl=http://localhost:9000
 serverVersion=6.5.0.27846
 dashboardUrl=http://localhost:9000/dashboard/index/pecunia:loan
-ceTaskId=AXBrohAtu8Ms47V_JvUa
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AXBrohAtu8Ms47V_JvUa
+ceTaskId=AXBsLEB0u8Ms47V_JvUb
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXBsLEB0u8Ms47V_JvUb

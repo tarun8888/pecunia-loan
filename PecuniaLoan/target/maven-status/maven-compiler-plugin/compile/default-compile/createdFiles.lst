@@ -1,7 +1,0 @@
-com\cg\pecunia\service\LoanService.class
-com\cg\pecunia\ui\Client.class
-com\cg\pecunia\exception\LoanException.class
-com\cg\pecunia\bean\Loan.class
-com\cg\pecunia\dao\LoanDaoImpl.class
-com\cg\pecunia\service\LoanServiceImpl.class
-com\cg\pecunia\dao\LoanDao.class
