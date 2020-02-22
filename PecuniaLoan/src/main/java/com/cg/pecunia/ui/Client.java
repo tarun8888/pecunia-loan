@@ -1,6 +1,7 @@
 package com.cg.pecunia.ui;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ public class Client {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		try {
 		Scanner scanner = new Scanner(System.in);
 		Loan loan = null;
 		LoanService loanService = new LoanServiceImpl();
@@ -120,6 +121,10 @@ public class Client {
 				System.out.println("enter correct choice");
 				break;
 			}
+		}
+		}
+		catch(InputMismatchException e) {
+			System.err.println("enter valid number (1-6)");
 		}
 
 	}
