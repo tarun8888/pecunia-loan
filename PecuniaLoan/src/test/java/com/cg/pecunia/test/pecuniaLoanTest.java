@@ -20,6 +20,7 @@ class pecuniaLoanTest {
 	
 	Loan loan1 = new Loan("123456789012",24,240000,11.5,888);
 	Loan loan2 = new Loan("123456789013",120,5000000,13.3,500);
+	Loan loan3 = new Loan("123",1200,50,12,90);
 	
 	
 	@BeforeEach
@@ -29,26 +30,22 @@ class pecuniaLoanTest {
 	}
 	
 	@Test
-	void testLoanApprovalStatus1() throws LoanException{
+	void testUserWithException() throws LoanException{
+		assertThrows(LoanException.class, ()-> loanDao.loanApprovalStatus(loan3,"1234"));
+		
+	}
+	
+	@Test
+	void testLoanApprovalStatus() throws LoanException{
 		String status1 = loanDao.loanApprovalStatus(loan1,"123456789012");
 		assertEquals("approved", status1);
 	
 	}
 		
-	@Test
-	void testLoanApprovalStatus2() throws LoanException{
-		String status2 = loanDao.loanApprovalStatus(loan2,"123456789021");
-		assertEquals("rejected", status2);
-	}
 	
 	@Test
-	void testValidateCreditScore1() {
-		boolean status1 = serviceDao.validateCreditScore(900);
-		assertEquals(true, status1);
-	}
 	
-	@Test
-	void testValidateCreditScore2() {
+	void testValidateCreditScore() throws LoanException{
 		
 		boolean status2 = serviceDao.validateCreditScore(50);
 		assertEquals(false, status2);
@@ -57,43 +54,30 @@ class pecuniaLoanTest {
 	
 	
 	@Test
-	void testValidateAmount1() {
+	void testValidateAmount() throws LoanException{
 		boolean status1 = serviceDao.validateAmount(1000000);
 		assertEquals(true, status1);
 		
 	}
 	
-	@Test
-	void testValidateAmount2() {
-		boolean status2 = serviceDao.validateAmount(5);
-		assertEquals(false, status2);
-	}
+	
+	
 	
 	@Test
-	void testValidateRateOfInterest1() {
-		boolean status1 = serviceDao.validateRateOfInterest(11.11);
-		assertEquals(true, status1);
-		
-	}
-	
-	@Test
-	void testValidateRateOfInterest2() {
+	void testValidateRateOfInterest2() throws LoanException{
 		boolean status2 = serviceDao.validateAmount(5.5);
 		assertEquals(false, status2);
 		
 	}
 	
 	@Test
-	void testValidateTenure1() {
+	void testValidateTenure() throws LoanException {
 		boolean status1 = serviceDao.validateTenure(120);
 		assertEquals(true, status1);
 		
 	}
-	@Test
-	void testValidateTenure2() {
-		boolean status2 = serviceDao.validateTenure(4);
-		assertEquals(false, status2);	
-	}
+	
+	
 	
 	
 

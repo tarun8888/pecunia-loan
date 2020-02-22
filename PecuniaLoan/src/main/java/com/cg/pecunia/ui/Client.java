@@ -33,7 +33,7 @@ public class Client {
 			
 			switch (choice) {
 			case 1:
-				try {
+			
 					String id = null;
 					double amount = 0,roi=0;
 					int tenure=0,score=0;
@@ -41,48 +41,29 @@ public class Client {
 					System.out.println("Enter Exsisting Account Number");
 					 id = scanner.next();
 					 if(!loanService.validateNumber(id))
-							 throw new LoanException("Invalid account Id : Id should be 12 digit");
+							 throw new LoanException("Invalid account Id : Id should be numeric 12 digit");
 
-					}
-					catch(LoanException e) {
-						System.err.println("\n"+e.getMessage()+"\n");
-					}
-					try {
+				
 					System.out.println("Enter Loan amount");
 					amount = scanner.nextDouble();
 					if(!loanService.validateAmount(amount))
 						throw new LoanException("Invalid Loan amount : Amount should be greater than 1000");
-					}
-					catch(LoanException e) {
-						System.err.println("\n"+e.getMessage()+"\n");
-					}
-					try {
+					
 					System.out.println("Enter tenure in months (above 12 months)");
 					tenure = scanner.nextInt();
 					if(!loanService.validateTenure(tenure))
 						 throw new LoanException("Invalid tenure: entered value is not valid");
-					}
-					catch(LoanException e) {
-						System.err.println("\n"+e.getMessage()+"\n");
-					}
-					try {
+					
 					System.out.println("Enter rate of interest (above 7.0%)");
 					roi = scanner.nextDouble();
 					if(!loanService.validateRateOfInterest(roi))
 						throw new LoanException("Invalid Interest rate : Rate of interest should be  in range of 4% to 15%");
-					}
-					catch(LoanException e) {
-						System.err.println("\n"+e.getMessage()+"\n");
-					}
-					try {
+					
 					System.out.println("Enter credit score (above 100)");
 					score = scanner.nextInt();
 					if(!loanService.validateCreditScore(score))
 						throw new LoanException("Invalid credit score : credit score should be in range of 100 to 999");
-					}
-					catch(LoanException e) {
-						System.err.println("\n"+e.getMessage()+"\n");
-					}
+					
 					
 					System.out.println("proceed (Y/N)?");
 					char proceed = scanner.next().charAt(0);
@@ -97,7 +78,7 @@ public class Client {
 					else {
 						if(proceed == 'N' || proceed =='n')
 							break;
-						System.err.println("enter valid option");
+						System.err.println("enter (Y/N)");
 					}
 							
 	
@@ -115,6 +96,9 @@ public class Client {
 				catch(LoanException le) {
 					System.err.println("\n"+le.getMessage()+"\n");
 				}
+				catch(NullPointerException ne) {
+					System.err.println("\nLoan details not added\n");
+				}
 				break;
 			
 			case 3:
@@ -125,12 +109,17 @@ public class Client {
 				catch(LoanException le) {
 					System.err.println("\n"+le.getMessage()+"\n");
 				}
+				catch(NullPointerException ne) {
+					System.err.println("\nLoan details not added\n");
+				}
 				break;
 				
 			case 4:
 				try {
 					list = new ArrayList<>();
 					list = loanService.loanRequestList();
+					if(list.isEmpty())
+						throw new LoanException("Loan Request List : Empty List");
 					System.out.println("Account ID\t\tTenure\t\tLoan Amount\t\tRate Of Interest\t\tCredit Score\t\tLoan Status\t\tAccount Balance\t\tEMI\n");
 					list.stream().forEach(p -> System.out.println(p));
 					
@@ -147,7 +136,8 @@ public class Client {
 				try {
 					list = new ArrayList<Loan>();
 					list = loanService.loanApprovalList(loan);
-					
+					if(list.isEmpty())
+						throw new LoanException("Loan Approval List : Empty List");
 					System.out.println("Account ID\t\tTenure\t\tLoan Amount\t\tRate Of Interest\t\tCredit Score\t\tLoan Status\t\tAccount Balance\t\tEMI\n");
 					list.stream().forEach(p -> System.out.println(p));
 					

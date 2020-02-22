@@ -16,7 +16,7 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	public Loan addLoanDetails(String accountId, double amount, int tenure, double rateOfInterest, int creditScore) throws LoanException {
-		
+		/*
 		if(!accountId.matches("[0-9]{12}"))
 			throw new LoanException("Invalid account Id : Id should be 12 digit");
 		if(!validateAmount(amount))
@@ -27,7 +27,7 @@ public class LoanServiceImpl implements LoanService {
 			throw new LoanException("Invalid Interest rate : Rate of interest should be  in range of 4% to 15%");
 		if(!validateCreditScore(creditScore))
 			throw new LoanException("Invalid credit score : credit score should be in range of 100 to 999");
-		
+		*/
 		return loanDao.addLoanDetails(accountId, amount, tenure, rateOfInterest, creditScore) ;
 	}
 
